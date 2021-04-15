@@ -16,7 +16,6 @@ async function checkLogin() {
     })
     let resp = await api_getLoginStatu(cookie)
     let data = await resp.json()
-    console.log(data)
     if (data["data"]["profile"] != null) {
         myApp.logined = true
         myApp.userName = data["data"]["profile"]["nickname"]
@@ -62,7 +61,7 @@ let wyyyy = {
             await checkLogin()
         },
         doUpdatePLaylists: async function() {
-            let resp = await (await api_getPlaylists(this.account)).json()
+            let resp = await (await api_getPlaylists(this.account,cookie)).json()
             myApp.playLists = resp["playlist"]
         }
     }
