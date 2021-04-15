@@ -19,16 +19,21 @@
             <span class="mdui-typo-title">CloudMusic</span>
         </div>
         <div class="mdui-tab mdui-tab-centered" mdui-tab>
-            <a href="#favLists" class="mdui-ripple">歌单</a>
+            <a href="#favLists" class="mdui-ripple" v-on:show.mdui.tab="doUpdatePLaylists">歌单</a>
             <a href="#search" class="mdui-ripple">搜索</a>
             <a href="#me" class="mdui-ripple">我</a>
         </div>
         <div id="favLists" class="mdui-p-a-2">
             <div id="loginMsg" v-if="!logined">
-                你还没有登录
+                你还没有登录或正在登陆中
             </div>
             <div id="realLists" v-if="logined">
-                Loading
+                <ul class="mdui-list">
+                    <li class="mdui-list-item mdui-ripple" v-for="item in playLists">
+                      <div class="mdui-list-item-avatar"><img v-bind:src='item["coverImgUrl"]+"?param=60y60"'/></div>
+                      <div class="mdui-list-item-content">{{item["name"]}}</div>
+                    </li>
+                  </ul>
             </div>
         </div>
         <div id="search" class="mdui-p-a-2">

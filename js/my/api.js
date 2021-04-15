@@ -2,18 +2,18 @@ let baseUrl = "https://netease-cloud-music-api-nine-gray.vercel.app/"
 
 async function api_getLoginStatu(cookie) {
     await fetch(
-        baseUrl + "login/refresh?cookie="+encodeURIComponent(cookie),
+        baseUrl + "login/refresh"+"?cookie=" + encodeURIComponent(cookie),
         {
             headers: {
                 "Accept": "*/*",
                 "Accept-Language": "zh-CN",
                 "Content-Type": "application/x-www-form-urlencoded"
             },
-            credentials: "omit"
+            credentials: "omit",
         }
     )
     return await fetch(
-        baseUrl + "login/status?cookie="+encodeURIComponent(cookie),
+        baseUrl + "login/status?"+"cookie=" + encodeURIComponent(cookie),
         {
             headers: {
                 "Accept": "*/*",
@@ -42,19 +42,19 @@ async function api_login(user, pass) {
     return resp
 }
 
-// async function api_logout() {
-//     let resp = await fetch(
-//         baseUrl + "logout",
-//         {
-//             method: "GET",
-//             headers: {
-//                 "Accept": "*/*",
-//                 "Accept-Language": "zh-CN",
-//                 "Content-Type": "application/x-www-form-urlencoded"
-//             },
-//             credentials: "omit",
-//             mode: 'cors'
-//         }
-//     )
-//     return resp
-// }
+async function api_getPlaylists(user, cookie) {
+    let resp = await fetch(
+        baseUrl + "user/playlist?timestamp=" + new Date().getTime()+"&cookie="+encodeURIComponent(cookie),
+        {
+            method: "POST",
+            body: "uid=" + user,
+            headers: {
+                "Accept": "*/*",
+                "Accept-Language": "zh-CN",
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            credentials: "omit"
+        }
+    )
+    return resp
+}
