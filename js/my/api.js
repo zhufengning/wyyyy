@@ -51,7 +51,7 @@ async function api_getPlaylists(user, cookie) {
         baseUrl + "user/playlist?timestamp=" + new Date().getTime(),
         {
             method: "POST",
-            body: "uid=" + user+"&cookie='"+cookie+"'"
+            body: "uid=" + user+"&cookie='"+cookie+"'",
             headers: {
                 "Accept": "*/*",
                 "Accept-Language": "zh-CN",
