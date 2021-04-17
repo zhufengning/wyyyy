@@ -1,8 +1,7 @@
 let baseUrl = "https://netease-cloud-music-api-nine-gray.vercel.app/"
-
-async function api_getLoginStatu(cookie) {
+export async function api_getLoginStatu(cookie) {
     await fetch(
-        baseUrl + "login/refresh"+"?timestamp=" + new Date().getTime(),
+        baseUrl + "login/refresh" + "?timestamp=" + new Date().getTime(),
         {
             headers: {
                 "Accept": "*/*",
@@ -11,11 +10,11 @@ async function api_getLoginStatu(cookie) {
             },
             credentials: "omit",
             method: "POST",
-            body: "cookie='"+cookie+"'"
+            body: "cookie='" + cookie + "'"
         }
     )
     return await fetch(
-        baseUrl + "login/status?timestamp="+new Date().getTime(),
+        baseUrl + "login/status?timestamp=" + new Date().getTime(),
         {
             headers: {
                 "Accept": "*/*",
@@ -24,12 +23,11 @@ async function api_getLoginStatu(cookie) {
             },
             credentials: "omit",
             method: "POST",
-            body: "cookie='"+cookie+"'"
+            body: "cookie='" + cookie + "'"
         }
     )
 }
-
-async function api_login(user, pass) {
+export async function api_login(user, pass) {
     let resp = await fetch(
         baseUrl + "login/cellphone",
         {
@@ -45,13 +43,12 @@ async function api_login(user, pass) {
     )
     return resp
 }
-
-async function api_getPlaylists(user, cookie) {
+export async function api_getPlaylists(user, cookie) {
     let resp = await fetch(
         baseUrl + "user/playlist?timestamp=" + new Date().getTime(),
         {
             method: "POST",
-            body: "uid=" + user+"&cookie='"+cookie+"'",
+            body: "uid=" + user + "&cookie='" + cookie + "'",
             headers: {
                 "Accept": "*/*",
                 "Accept-Language": "zh-CN",

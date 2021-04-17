@@ -1,83 +1,26 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" />
-    <meta name="renderer" content="webkit" />
-    <meta name="force-rendering" content="webkit" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <title>CloudMusic</title>
-    <link rel="stylesheet" href="css/mdui/mdui.css" crossorigin="anonymous" />
-    <script src="js/vue/vue.global.js"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" />
+  <meta name="renderer" content="webkit" />
+  <meta name="force-rendering" content="webkit" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <title>CloudMusic</title>
+  <link rel="icon" href="/favicon.ico" />
+  <title>Vite App</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mdui@1.0.1/dist/css/mdui.min.css"
+    integrity="sha384-cLRrMq39HOZdvE0j6yBojO4+1PrHfB7a9l5qLcmRm/fiWXYY+CndJPmyu5FV/9Tw" crossorigin="anonymous" />
+  <script type="module" src="/src/api.js"></script>
 </head>
 
 <body>
-
-    <div id="app">
-        <div class="mdui-toolbar">
-            <span class="mdui-typo-title">CloudMusic</span>
-        </div>
-        <div class="mdui-tab mdui-tab-centered" mdui-tab>
-            <a href="#favLists" class="mdui-ripple" v-on:show.mdui.tab="doUpdatePLaylists">歌单</a>
-            <a href="#search" class="mdui-ripple">搜索</a>
-            <a href="#me" class="mdui-ripple">我</a>
-        </div>
-        <div id="favLists" class="mdui-p-a-2">
-            <div id="loginMsg" v-if="!logined">
-                你还没有登录或正在登陆中
-            </div>
-            <div id="realLists" v-if="logined">
-                <ul class="mdui-list">
-                    <li class="mdui-list-item mdui-ripple" v-for="item in playLists">
-                      <div class="mdui-list-item-avatar"><img v-bind:src='item["coverImgUrl"]+"?param=60y60"'/></div>
-                      <div class="mdui-list-item-content">{{item["name"]}}</div>
-                    </li>
-                  </ul>
-            </div>
-        </div>
-        <div id="search" class="mdui-p-a-2">
-
-        </div>
-        <div id="me" class="mdui-p-a-2">
-            <div class="mdui-card">
-
-                <!-- 卡片头部，包含头像、标题、副标题 -->
-                <div class="mdui-card-header">
-                    <img class="mdui-card-header-avatar" v-bind:src="ava" />
-                    <div class="mdui-card-header-title">{{userName}}</div>
-                </div>
-
-                <!-- 卡片的按钮 -->
-                <div class="mdui-card-actions">
-                    <button v-if="!logined" class="mdui-btn mdui-ripple" mdui-dialog="{target:'#loginPage'}">登录</button>
-                    <button v-if="logined" class="mdui-btn mdui-ripple" v-on:click="doLogOut">退出</button>
-                </div>
-
-            </div>
-        </div>
-
-        <div class="mdui-dialog" id="loginPage">
-            <div class="mdui-dialog-content">
-                <div class="mdui-dialog-title">登录</div>
-                <div class="mdui-textfield mdui-textfield-floating-label">
-                    <label class="mdui-textfield-label">手机号码</label>
-                    <input class="mdui-textfield-input" v-model="phone" />
-                </div>
-                <div class="mdui-textfield mdui-textfield-floating-label">
-                    <label class="mdui-textfield-label">密码</label>
-                    <input class="mdui-textfield-input" type="password" v-model="password" />
-                </div>
-            </div>
-            <div class="mdui-dialog-actions">
-                <button class="mdui-btn mdui-ripple" id="loginOk" v-on:click="doRealLogin" mdui-dialog-close>OK</button>
-                <button class="mdui-btn mdui-ripple" id="loginCancel" mdui-dialog-close>取消</button>
-            </div>
-        </div>
-    </div>
-    <script src="js/mdui/mdui.js" crossorigin="anonymous"></script>
-    <script src="js/my/api.js"></script>
-    <script src="js/my/main.js"></script>
+  <div id="app"></div>
+  <script type="module" src="/src/main.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mdui@1.0.1/dist/js/mdui.min.js"
+    integrity="sha384-gCMZcshYKOGRX9r6wbDrvF+TcCCswSHFucUzUPwka+Gr+uHgjlYvkABr95TCOz3A"
+    crossorigin="anonymous"></script>
 </body>
 
 </html>
