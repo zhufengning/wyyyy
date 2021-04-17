@@ -8,7 +8,6 @@
   },
   "dependencies": {
     "vue": "^3.0.5",
-    "mdui": "^1.0.2",
     "vue-router": "^3.5.1"
   },
   "devDependencies": {
