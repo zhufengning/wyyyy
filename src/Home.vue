@@ -1,23 +1,29 @@
 <template>
-  <div class="mdui-tab mdui-tab-centered" mdui-tab>
-    <a
-      href="#favLists"
-      class="mdui-ripple"
-      v-on:show.mdui.tab="doUpdatePLaylists"
-      >歌单</a
-    >
-    <a href="#search" class="mdui-ripple">搜索</a>
-    <a href="#me" class="mdui-ripple">我</a>
+  <div class="mdui-appbar mdui-shadow-0">
+    <div class="mdui-toolbar">
+      <span class="mdui-typo-title">CloudMusic</span>
+    </div>
+    <div class="mdui-tab mdui-tab-centered" mdui-tab>
+      <a href="#favLists" class="mdui-ripple" v-on:show.mdui.tab="doUpdatePLaylists"
+        >歌单</a
+      >
+      <a href="#search" class="mdui-ripple">搜索</a>
+      <a href="#me" class="mdui-ripple">我</a>
+    </div>
   </div>
   <div id="favLists" class="mdui-p-a-2">
-    <div id="loginMsg" v-if="!logined">你还没有登录或正在登陆中</div>
+    <div id="loginMsg" v-if="!logined">你还没有登录或正在登录中</div>
     <div id="realLists" v-if="logined">
       <ul class="mdui-list">
         <li class="mdui-list-item mdui-ripple" v-for="item in playLists">
           <div class="mdui-list-item-avatar">
             <img v-bind:src="item['coverImgUrl'] + '?param=60y60'" />
           </div>
-          <div class="mdui-list-item-content">{{ item["name"] }}</div>
+          <div class="mdui-list-item-content">
+            <router-link v-bind:to="'/playlist/' + item['id']">{{
+              item["name"]
+            }}</router-link>
+          </div>
         </li>
       </ul>
     </div>
@@ -40,17 +46,12 @@
         >
           登录
         </button>
-        <button
-          v-if="logined"
-          class="mdui-btn mdui-ripple"
-          v-on:click="doLogOut"
-        >
+        <button v-if="logined" class="mdui-btn mdui-ripple" v-on:click="doLogOut">
           退出
         </button>
       </div>
     </div>
   </div>
-
   <div class="mdui-dialog" id="loginPage">
     <div class="mdui-dialog-content">
       <div class="mdui-dialog-title">登录</div>
@@ -60,11 +61,7 @@
       </div>
       <div class="mdui-textfield mdui-textfield-floating-label">
         <label class="mdui-textfield-label">密码</label>
-        <input
-          class="mdui-textfield-input"
-          type="password"
-          v-model="password"
-        />
+        <input class="mdui-textfield-input" type="password" v-model="password" />
       </div>
     </div>
     <div class="mdui-dialog-actions">
@@ -84,8 +81,10 @@
 </template>
 <script>
 import { api_getLoginStatu, api_getPlaylists, api_login } from "./api";
-const DEFUALT_AVA = "https://p2.music.126.net/SUeqMM8HOIpHv9Nhl9qt9w==/109951165647004069.jpg?param=60y60"
-let cookie = localStorage.cookie
+import mdui from "mdui";
+const DEFUALT_AVA =
+  "https://p2.music.126.net/SUeqMM8HOIpHv9Nhl9qt9w==/109951165647004069.jpg?param=60y60";
+let cookie = localStorage.cookie;
 export default {
   data() {
     return {
@@ -101,8 +100,20 @@ export default {
   created() {
     this.checkLogin();
   },
+  mounted() {
+    this.rebuildUI();
+  },
+  watch: {
+    $route: "rebuildUI",
+  },
   methods: {
+    rebuildUI: function () {
+      mdui.mutation();
+    },
     doRealLogin: async function () {
+      mdui.snackbar({
+        message: "登录中",
+      });
       let resp = await (await api_login(this.phone, this.password)).json();
       cookie = resp["cookie"];
       localStorage.cookie = cookie;
@@ -130,7 +141,7 @@ export default {
       }
 
       mdui.snackbar({
-        message: "登录中",
+        message: "验证登录中",
       });
       let resp = await api_getLoginStatu(cookie);
       let data = await resp.json();
