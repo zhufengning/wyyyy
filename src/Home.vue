@@ -128,8 +128,17 @@ export default {
     doUpdatePLaylists: async function () {
       let resp = await (await api_getPlaylists(this.account, cookie)).json();
       this.playLists = resp["playlist"];
+      localStorage.myLists = JSON.stringify(this.playLists);
     },
     checkLogin: async function () {
+      if (localStorage.myLists != null) {
+        try {
+          this.logined = true;
+          this.playLists = JSON.parse(localStorage.myLists);
+        } catch (error) {
+          console.log(error);
+        }
+      }
       if (cookie == null) {
         this.logined = false;
         this.userName = "";
@@ -143,8 +152,8 @@ export default {
       mdui.snackbar({
         message: "验证登录中",
       });
-      let resp = await api_getLoginStatu(cookie);
-      let data = await resp.json();
+      let data = await (await api_getLoginStatu(cookie)).json();
+
       if (data["data"]["profile"] != null) {
         this.logined = true;
         this.userName = data["data"]["profile"]["nickname"];
