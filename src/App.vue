@@ -24,9 +24,9 @@ export default {
       songAuther: "",
       songImg:
         "https://p1.music.126.net/jWE3OEZUlwdz0ARvyQ9wWw==/109951165474121408.jpg?param=60y60",
-    };
+    }
   },
-};
+}
 </script>
 
 <style>

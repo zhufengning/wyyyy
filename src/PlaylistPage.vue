@@ -25,9 +25,9 @@
 </template>
 
 <script>
-import { api_getPlaylist } from "./api.js";
-import mdui from "mdui";
-let cookie = localStorage.cookie;
+import { api_getPlaylist } from "./api.js"
+import mdui from "mdui"
+let cookie = localStorage.cookie
 export default {
   data() {
     return {
@@ -35,37 +35,37 @@ export default {
       list: [],
       backimg: "",
       updTime: new Date(0),
-    };
+    }
   },
   methods: {
     updateList: async function () {
-      mdui.snackbar("更新中");
-      let ret = await api_getPlaylist(this.$route.params.id, cookie);
-      localStorage.setItem("list" + this.$route.params.id, JSON.stringify(ret));
-      console.log(ret);
-      this.list = ret.list;
-      this.name = ret.name;
-      this.backimg = ret.img;
-      this.updTime = ret.updTime;
-      mdui.snackbar("更新完成");
+      mdui.snackbar("更新中")
+      let ret = await api_getPlaylist(this.$route.params.id, cookie)
+      localStorage.setItem("list" + this.$route.params.id, JSON.stringify(ret))
+      console.log(ret)
+      this.list = ret.list
+      this.name = ret.name
+      this.backimg = ret.img
+      this.updTime = ret.updTime
+      mdui.snackbar("更新完成")
     },
     back: function () {
-      this.$router.back();
+      this.$router.back()
     },
   },
   async created() {
-    let inf = localStorage.getItem("list" + this.$route.params.id);
+    let inf = localStorage.getItem("list" + this.$route.params.id)
     if (inf != null) {
-      inf = JSON.parse(inf);
-      this.list = inf.list;
-      this.name = inf.name;
-      this.backimg = inf.img;
-      this.updTime = inf.updTime;
+      inf = JSON.parse(inf)
+      this.list = inf.list
+      this.name = inf.name
+      this.backimg = inf.img
+      this.updTime = inf.updTime
     } else {
-      mdui.snackbar("加载中");
-      await this.updateList();
-      mdui.snackbar(this.name + "加载完成");
+      mdui.snackbar("加载中")
+      await this.updateList()
+      mdui.snackbar(this.name + "加载完成")
     }
   },
-};
+}
 </script>

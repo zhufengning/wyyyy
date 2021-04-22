@@ -2,8 +2,8 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import Home from "./Home.vue"
 import PlaylistPage from "./PlaylistPage.vue"
-import {createRouter} from "vue-router"
-import {createWebHistory} from "vue-router"
+import { createRouter } from "vue-router"
+import { createWebHistory } from "vue-router"
 
 const routes = [
     {
